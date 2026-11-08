@@ -18,8 +18,8 @@
       # login_user: root
       # login_password: ExpenseApp@1
       # login_host: mysql.pavancloud5.online
-    register: MYSQL-INFO
+    register: MYSQL_INFO
 
   - name: print the output
     ansible.builtin.debug:
-      msg: "{{ MYSQL-INFO }}"
+      msg: "{{ MYSQL_INFO }}"
