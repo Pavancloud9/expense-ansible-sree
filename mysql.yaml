@@ -14,10 +14,10 @@
       enabled: yes
   
   - name: connect to mysql-server
-    ansible.mysql.mysql_db:
-      login_user: root
-      login_password: ExpenseApp@1
-      login_host: mysql.pavancloud5.online
+    ansible.builtin.command: mysql -h mysql.pavancloud5.online -uroot -pExpenseApp@1
+      # login_user: root
+      # login_password: ExpenseApp@1
+      # login_host: mysql.pavancloud5.online
     register: MYSQL-INFO
 
   - name: print the output
