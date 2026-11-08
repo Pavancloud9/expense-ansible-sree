@@ -23,7 +23,7 @@
       login_password: ExpenseApp@1
       login_host: mysql.pavancloud5.online
     register: MYSQL_INFO
-    igonre_errors: true
+    ignore_errors: true
 
   - name: print the output
     ansible.builtin.debug:
