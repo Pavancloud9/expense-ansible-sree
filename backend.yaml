@@ -46,7 +46,7 @@
       dest: /etc/systemd/system/backend.service
 
   - name: Import MYSQL schema into the database
-    ansible.mysql.mysql_db:
+    ansible.mysql.mysql.db:
       state: import
       name: all
       login_user: root
