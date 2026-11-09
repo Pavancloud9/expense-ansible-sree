@@ -8,10 +8,13 @@
   - name: enable nodejs:20
     ansible.builtin.command: dnf module enable nodejs:20 -y
 
-  - name: install nodejs
+  - name: install nodejs,mysql-client
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: installed
+    loop:
+    - nodejs
+    - mysql
 
   - name: create expense user
     ansible.builtin.user:
@@ -41,5 +44,14 @@
     ansible.builtin.copy:
       src: /home/ec2-user/expense-ansible-sree/backend.service
       dest: /etc/systemd/system/backend.service
+
+  - name: Import MYSQL schema into the database
+    ansible.mysql.mysql_db:
+      state: import
+      name: all
+      login_user: root
+      login_password: ExpenseApp@1
+      login_host: mysql.pavancloud5.online
+      target: /app/schema/backend.sql
 
 
