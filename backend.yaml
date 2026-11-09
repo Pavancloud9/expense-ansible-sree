@@ -37,3 +37,9 @@
     community.general.npm:
       path: /app
   
+  - name: Copy backend service file
+    ansible.builtin.copy:
+      src: /home/ec2-user/expense-ansible-sree/backend.service
+      dest: /etc/systemd/system/backend.service
+
+
