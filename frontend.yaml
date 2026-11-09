@@ -18,7 +18,28 @@
       path: /usr/share/nginx/html/
       state: absent
 
-  - name: Create a directory if it does not exist
+  - name: Create html directory 
     ansible.builtin.file:
       path: /usr/share/nginx/html
       state: directory
+
+  - name: Download frontend code
+    ansible.builtin.get_url:
+      url: https://expense-builds.s3.us-east-1.amazonaws.com/expense-frontend-v2.zip
+      dest: /tmp/frontend.zip
+  
+  - name: unzip frontend code
+    ansible.builtin.unarchive:
+      src: /tmp/frontend.zip
+      dest: /usr/share/nginx/html
+      remote_src: yes
+
+  - name: Copy expense.conf file
+    ansible.builtin.copy:
+      src: /home/ec2-user/expense-ansible-sree/expense.conf
+      dest: /etc/nginx/default.d/expense.conf
+
+  - name: restart nginx service
+    ansible.builtin.service:
+      name: nginx
+      state: restarted
